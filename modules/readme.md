@@ -16,12 +16,13 @@ The `:optimize-constants` implicit option of `:advanced` is also not optimal and
 
 Run: (use cljs.jar included in repo or download)
 ```
-curl -L https://github.com/clojure/clojurescript/releases/download/r1.9.512/cljs.jar
-java -cp cljs.jar:src clojure.main build.clj
+curl -L https://github.com/clojure/clojurescript/releases/download/r1.9.512/cljs.jar -o cljs.jar
+curl -L https://clojars.org/repo/cljsjs/plotly/1.25.0-0/plotly-1.25.0-0.jar -o plotly.jar
+java -cp cljs.jar:plotly.jar:src clojure.main build.clj
 
 open modules.html
 ```
-    
+
 ## Issues
 
 ```
@@ -43,10 +44,10 @@ Adding remaining namespaces to :cljs-base
   adding entry [goog.math.Long]
   adding entry (cljs.core)
   adding entry (cljs.core.constants)
-  adding entry (foo.b)
+  adding entry [cljsjs.plotly]
   adding entry (foo.a)
+  adding entry (foo.b)
 ```
 
 - `foo.b` was never referenced and should not have been included in the build.
-- `foo.a` was only used by `foo.main` but ended up in the `cljs_base.js` module since it is a transitive dependency the user did not specify. It should have been in the `:main` module before going into Closure.
-- `main.js` only contains something like `console.log("main loaded",Fe);` where `Fe` is the keyword which was constructed in the `cljs_base.js` although it was only used in this module.
+- `cljsjs.plotly` was only used in `foo.a`, which itself is only used in `foo.main`, but ended up in `cljs_base.js`
