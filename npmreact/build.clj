@@ -10,4 +10,4 @@
    :verbose true
    :optimizations :none
    :language-in :ecmascript6
-   :npm-deps {:react "15.5.0"}})
+   :npm-deps {:react "15.5.4"}})
