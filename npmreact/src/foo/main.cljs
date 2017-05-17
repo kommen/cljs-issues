@@ -1,4 +1,6 @@
 (ns foo.main
   (:require react))
 
-(js/console.log js/React)
+(def title
+  (react/DOM.div nil
+    (react/createElement "h1" nil "Page title")))
