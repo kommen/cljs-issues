@@ -11,4 +11,5 @@ pom.xml.asc
 *.class
 /.idea
 .DS_Store
-
+cljs.jar
+node_modules
